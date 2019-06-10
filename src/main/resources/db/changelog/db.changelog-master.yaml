@@ -1,0 +1,99 @@
+#Note change this to XML yml is too restrictive
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: tsweets
+      changes:
+        - createTable:
+            tableName: environment
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: component
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: environment_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: build_id
+                  type: varchar(255)
+              - column:
+                  name: create_date
+                  type: timestamp
+              - column:
+                  name: scm_hash
+                  type: varchar(50)
+              - column:
+                  name: sha256
+                  type: varchar(50)
+  - changeSet:
+      id: 2
+      author: tsweets
+      loadData:
+        file: db/data/environment.csv
+        tableName: environment
+        columns:
+          - column:
+              name: id
+              type: numeric
+          - column:
+              name: name
+              type: string
+  - changeSet:
+      id: 3
+      author: tsweets
+      changes:
+        - createTable:
+            tableName: deployable
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: environment_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: build_id
+                  type: varchar(255)
+              - column:
+                  name: create_date
+                  type: timestamp
+              - column:
+                  name: sha256
+                  type: varchar(50)
