@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.beer30</groupId>
 	<artifactId>rts</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>rts</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -74,14 +74,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
-<!--
 
         <dependency>
             <groupId>org.eclipse.jgit</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
             <version>5.3.1.201904271842-r</version>
         </dependency>
--->
 	</dependencies>
 
 	<build>

@@ -1,5 +1,6 @@
 package org.beer30.rts.service.impl;
 
+import org.beer30.rts.domain.Component;
 import org.beer30.rts.domain.Deployable;
 import org.beer30.rts.domain.Environment;
 import org.beer30.rts.repository.DeployableRepository;
@@ -8,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class DeployableServiceImpl implements DeployableService {
 
     @Autowired
     DeployableRepository deployableRepository;
+
+
 
     @Override
     public Deployable addDeployable(Environment environment, String name, String buildId, String sha256) {
@@ -35,5 +40,19 @@ public class DeployableServiceImpl implements DeployableService {
         Deployable deployableFound = deployableRepository.findById(deployableId).orElse(null);
 
         return deployableFound;
+    }
+
+    @Override
+    public Deployable addComponent(Environment environment, Deployable deployable, Component component) {
+        Set<Component> componentSet = deployable.getComponents();
+        if (componentSet == null) {
+            componentSet = new HashSet<Component>();
+        }
+
+        componentSet.add(component);
+        deployable.setComponents(componentSet);
+        Deployable deployableSaved = deployableRepository.save(deployable);
+
+        return  deployableSaved;
     }
 }

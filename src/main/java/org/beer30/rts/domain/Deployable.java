@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -21,16 +22,22 @@ public class Deployable {
     private Environment environment;
 
     @Column
-    private String name;
+    private Instant createDate;
 
     @Column
-    private Instant createDate;
+    private String name;
 
     @Column
     private String buildId;
 
     @Column
     private String sha256;
+
+    @ManyToMany
+    @JoinTable(name = "deployable_component", joinColumns = @JoinColumn(name = "deployable_id"), inverseJoinColumns = @JoinColumn(name = "component_id"))
+    private Set<Component> components;
+
+
 
 
     public Long getId() {
@@ -79,6 +86,14 @@ public class Deployable {
 
     public void setSha256(String sha256) {
         this.sha256 = sha256;
+    }
+
+    public Set<Component> getComponents() {
+        return components;
+    }
+
+    public void setComponents(Set<Component> components) {
+        this.components = components;
     }
 
     @Override

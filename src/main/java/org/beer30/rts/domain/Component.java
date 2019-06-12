@@ -1,5 +1,6 @@
 package org.beer30.rts.domain;
 
+import org.beer30.rts.domain.enums.ComponentType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,19 +22,24 @@ public class Component {
     private Environment environment;
 
     @Column
+    private Instant createDate;
+
+    @Column
     private String name;
+
+    @Column
+    private ComponentType componentType;
+
+    @Column
+    private String componentReference;
 
     @Column
     private String scmHash;
 
-    @Column
-    private Instant createDate;
 
-//    @Column
+    @Column
     private String buildId;
 
-    @Column
-    private String sha256;
 
     public Long getId() {
         return id;
@@ -83,12 +89,21 @@ public class Component {
         this.buildId = buildId;
     }
 
-    public String getSha256() {
-        return sha256;
+
+    public ComponentType getComponentType() {
+        return componentType;
     }
 
-    public void setSha256(String sha256) {
-        this.sha256 = sha256;
+    public void setComponentType(ComponentType componentType) {
+        this.componentType = componentType;
+    }
+
+    public String getComponentReference() {
+        return componentReference;
+    }
+
+    public void setComponentReference(String componentReference) {
+        this.componentReference = componentReference;
     }
 
     @Override
@@ -101,13 +116,12 @@ public class Component {
                 Objects.equals(name, component.name) &&
                 Objects.equals(scmHash, component.scmHash) &&
                 Objects.equals(createDate, component.createDate) &&
-                Objects.equals(buildId, component.buildId) &&
-                Objects.equals(sha256, component.sha256);
+                Objects.equals(buildId, component.buildId) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, environment, name, scmHash, createDate, buildId, sha256);
+        return Objects.hash(id, environment, name, scmHash, createDate, buildId);
     }
 
     @Override
@@ -119,7 +133,8 @@ public class Component {
                 ", scmHash='" + scmHash + '\'' +
                 ", createDate=" + createDate +
                 ", buildId='" + buildId + '\'' +
-                ", sha256='" + sha256 + '\'' +
+                ", componentType=" + componentType +
+                ", componentReference='" + componentReference + '\'' +
                 '}';
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
@@ -49,7 +48,7 @@ public class ComponentResource {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
 
-        Component result = componentService.addComponent(component.getEnvironment(),component.getName(),component.getScmHash(),component.getBuildId(),component.getSha256());
+        Component result = componentService.addComponent(component.getEnvironment(),component.getName(),component.getScmHash(),component.getBuildId(), component.getComponentType(), component.getComponentReference());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

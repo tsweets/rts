@@ -2,6 +2,7 @@ package org.beer30.rts.service.impl;
 
 import org.beer30.rts.domain.Component;
 import org.beer30.rts.domain.Environment;
+import org.beer30.rts.domain.enums.ComponentType;
 import org.beer30.rts.repository.ComponentRepository;
 import org.beer30.rts.service.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,15 @@ public class ComponentServiceImpl implements ComponentService {
     ComponentRepository componentRepository;
 
     @Override
-    public Component addComponent(Environment environment, String name, String scmHash, String buildId, String sha256) {
+    public Component addComponent(Environment environment, String name, String scmHash, String buildId, ComponentType componentType, String componentReference) {
         Component component = new Component();
         component.setBuildId(buildId);
         component.setCreateDate(Instant.now());
         component.setEnvironment(environment);
         component.setName(name);
         component.setScmHash(scmHash);
-        component.setSha256(sha256);
+        component.setComponentType(componentType);
+        component.setComponentReference(componentReference);
 
         Component componentSaved = componentRepository.save(component);
 

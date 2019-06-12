@@ -51,6 +51,12 @@ databaseChangeLog:
               - column:
                   name: sha256
                   type: varchar(50)
+              - column:
+                  name: component_type
+                  type: varchar(25)
+              - column:
+                  name: component_reference
+                  type: varchar(255)
   - changeSet:
       id: 2
       author: tsweets
@@ -97,3 +103,56 @@ databaseChangeLog:
               - column:
                   name: sha256
                   type: varchar(50)
+  - changeSet:
+      id: 4
+      author: tsweets
+      changes:
+        - createTable:
+            tableName: deployable_component
+            columns:
+              - column:
+                  name: deployable_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: component_id
+                  type: int
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: release
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: environment_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: release_label
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp
+        - createTable:
+            tableName: release_deployable
+            columns:
+              - column:
+                  name: release_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deployable_id
+                  type: int
+                  constraints:
+                    nullable: false
