@@ -59,7 +59,7 @@ public class RtsApplicationTests {
         Component component3 = componentService.addComponent(environment,"Component 3","f46fdfa0593", "BUILD 15", ComponentType.BUILDABLE, "3f15e52ae9be914ea808a50a93284dd3aeac05b4fc5e3c3fae96d5c97552f204");
         Component component4 = componentService.addComponent(environment,"jackson-annotations",null, null, ComponentType.THIRD_PARTY, "d5b90213-52f8-4429-b3c7-ed582af929d2");
 
-        Deployable deployable = deployableService.addDeployable(environment,"Deployable A","Build 114", "somesha256");
+        Deployable deployable = deployableService.addDeployable(environment,"Deployable A","Build 114", "dcb997cc2bfd396426f0d6c72135706519e9f66ee25a0008cf78a23d84e7543b");
         Assert.assertNotNull(deployable);
 
         deployable = deployableService.addComponent(environment,deployable,component);
@@ -70,10 +70,10 @@ public class RtsApplicationTests {
         Assert.assertNotNull(components);
         Assert.assertEquals(2, components.size());
 
-        Release release = releaseService.createRelease(environment,"Some Release Same Label");
+        Release release = releaseService.createRelease(environment,"SAM Skyline Release v1.2.3");
         Assert.assertNotNull(release);
 
-        Deployable deployable2 = deployableService.addDeployable(environment,"Deployable B","Build 109", "somesha256");
+        Deployable deployable2 = deployableService.addDeployable(environment,"Deployable B","Build 109", "24d613a3d6d65e6aca56735198d0f43a7276a8cbb3694bda877d77cd2e234cdf");
         deployable2 = deployableService.addComponent(environment, deployable2,component3);
         deployable2 = deployableService.addComponent(environment, deployable2,component4);
 

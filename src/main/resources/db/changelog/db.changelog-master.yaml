@@ -50,7 +50,7 @@ databaseChangeLog:
                   type: varchar(50)
               - column:
                   name: sha256
-                  type: varchar(50)
+                  type: varchar(255)
               - column:
                   name: component_type
                   type: varchar(25)
@@ -102,7 +102,7 @@ databaseChangeLog:
                   type: timestamp
               - column:
                   name: sha256
-                  type: varchar(50)
+                  type: varchar(255)
   - changeSet:
       id: 4
       author: tsweets
