@@ -6,6 +6,7 @@ import org.beer30.rts.domain.Deployable;
 import org.beer30.rts.domain.Environment;
 import org.beer30.rts.service.EnvironmentService;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class DeployableResourceTest {
     @MockBean
     private EnvironmentService environmentService;
 
+    @Ignore
     @Test
     public void testDeployable() throws Exception {
         Environment environment = new Environment();
